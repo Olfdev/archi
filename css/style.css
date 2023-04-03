@@ -40,6 +40,11 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
+header span{
+	text-transform: uppercase;
+	margin-top: 0.2rem;
+}
+
 #admin-bar{
 	background-color: black;
     padding-block: 0.8rem;
