@@ -1,25 +1,17 @@
 let worksArray;
 let workName;
+let categoriesArray;
 const gallery = document.getElementById('gallery');
-const allBtn = document.getElementById('button-all');
-const objBtn = document.getElementById('button-objects');
-const aptBtn = document.getElementById('button-apartments');
-const hotelBtn = document.getElementById('button-hotels');
-const buttons = document.querySelectorAll('.button');
-
-//selected button background and text color change
-buttons.forEach(button => {
-    button.addEventListener('click', function() {
-      buttons.forEach(btn => btn.classList.remove('button-selected'));
-      this.classList.add('button-selected');
-    });
-  });
-
+const btnContainer = document.querySelector('.buttons-container');
 //fetch works
-const answer = await fetch('http://localhost:5678/api/works');
-worksArray = await answer.json();
+const answerWorks = await fetch('http://localhost:5678/api/works');
+worksArray = await answerWorks.json();
 
-//create all works
+//fetch categories
+const answerCategories = await fetch('http://localhost:5678/api/categories');
+categoriesArray = await answerCategories.json();
+
+//create DOM works for category All
 function createAll(){
     document.getElementById('gallery').innerHTML = "";
     for (let i = 0; i < worksArray.length; i++) {
@@ -43,34 +35,39 @@ function createAll(){
         figcaption.innerHTML = works.title;
     }
 }
+//category All, button create
+const allBtn = document.createElement('button');
+allBtn.classList.add('button');
+allBtn.type= 'button';
+allBtn.innerHTML = "Tous";
+btnContainer.appendChild(allBtn);
 
-//button create objects works
-objBtn.addEventListener('click', () => {
-    workName = "Objets";
-    document.getElementById('gallery').innerHTML = "";
-    createDom();
-});
-
-//button create apartments works
-aptBtn.addEventListener('click', () => {
-    workName = "Appartements";
-    document.getElementById('gallery').innerHTML = "";
-    createDom();
-});
-
-//button create hotels and restaurants works
-hotelBtn.addEventListener('click', () => {
-    workName = "Hotels & restaurants";
-    document.getElementById('gallery').innerHTML = "";
-    createDom();
-});
-
-//button create all works
+//category All button: change class for background & text color
 allBtn.addEventListener('click', () => {
+    const buttons = document.querySelectorAll('.button');
+    buttons.forEach(oldBtn => oldBtn.classList.remove('button-selected'));
+    allBtn.classList.add('button-selected');
     createAll();
 });
 
-//create DOM
+//categories buttons create
+for (let i = 0; i < categoriesArray.length; i++) {
+	const btn = document.createElement('button');
+	btn.classList.add('button');
+    btn.type= 'button';
+    btn.innerHTML = categoriesArray[i].name;
+	btn.addEventListener('click', () => {
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(oldBtn => oldBtn.classList.remove('button-selected'));
+        btn.classList.add('button-selected');
+        workName = categoriesArray[i].name;
+        document.getElementById('gallery').innerHTML = "";
+        createDom();
+	});
+	btnContainer.appendChild(btn);
+}
+
+//create DOM works for each category (except All)
 function createDom(){
     const filtered = worksArray.filter(element => element.category.name === workName);
     for (let i = 0; i < filtered.length; i++) {

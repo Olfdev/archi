@@ -4,26 +4,31 @@
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./css/style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
-	<link rel="stylesheet" href="./css/style.css">
-	<!-- <script defer src="./js/script.js"></script> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 	<script defer src="./js/works_filters.js" type="module"></script>
-	<!-- <script defer src="./js/filters.js" type="module"></script> -->
+	<script defer src="./js/connected.js"></script>
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+	<div id="header">
+		<a href="./index.html"><h1>Sophie Bluel<span>Architecte d'intérieur</span></h1></a>
+		<nav>
+			<ul>
+				<li class="nav-bold no-hover">projets</li>
+				<li>contact</li>
+				<li id="login-link"><a href="./login.html">login</a></li>
+				<li id="logout-link">logout</li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</div>
 </header>
 <main>
 	<section id="introduction">
@@ -37,14 +42,12 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+	<div id="admin-edit"></div>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div class="buttons-container">
-			<button id="button-all" class="button button-selected" type="button">Tous</button>
-			<button id="button-objects" class="button" type="button">Objets</button>
-			<button id="button-apartments" class="button" type="button">Appartements</button>
-			<button id="button-hotels" class="button" type="button">Hôtels & restaurants</button>
+		<div id="portfolio-title">
+			<h2>Mes Projets</h2>
 		</div>
+		<div class="buttons-container"></div>
 		<div id="gallery"></div>
 	</section>
 	<section id="contact">
