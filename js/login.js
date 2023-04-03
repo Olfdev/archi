@@ -46,7 +46,7 @@ login.addEventListener("submit", async function (event) {
         console.log('Token stored in session storage:', mytoken.token);
         //set 1s delay: Clear the connexion message and redirects to index.html
         setTimeout(() => {
-            window.location.href = "index.html";
+            window.location.href = "./index.html";
         }, "1000")
     }else{
         console.log("login NOT OK");
