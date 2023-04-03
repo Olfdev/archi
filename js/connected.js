@@ -33,7 +33,7 @@ logoutLink.addEventListener('click', function() {
 	localStorage.clear();
 	console.log('Token removed from session storage');
 	//refresh index.html
-	window.location.href = "/index.html";
+	window.location.href = "./index.html";
 });
 
 function displayAdmin(){
