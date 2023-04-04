@@ -1,61 +1,53 @@
 const login = document.querySelector('.logmein');
 const loginId = document.getElementById('login')
-const errorCheck = document.querySelectorAll('p');
+//const errorCheck = document.querySelectorAll('p');
 let connexionMsg;
 
+//listen to the submit button
 login.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    // if (errorCheck.classList.contains("error-message")){
-    //     const errorMessages = document.querySelectorAll('.error-message');
-    //     //connexionMsg.remove();
-    //     errorMessages.forEach((errorMessage) => {
-    //     errorMessage.classList.remove('error-message');
-    //     });
-    // }
-
+    //store email and password inputs from user and convert them to JSON
     const email = event.target.querySelector("[name=email]").value;
+    //console.log(event.target.querySelector("[name=email]").value);
     const password = event.target.querySelector("[name=password").value;
+    //console.log(event.target.querySelector("[name=password").value);
+    const credentials = JSON.stringify({email: email, password: password})
+    //console.log(credentials);
 
-    console.log(email);
-    console.log(password);
-
+    //compare the credentials with the stored ones and get the backend answer
     const answer = await fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-             email: email,
-             password: password,
-        })
+        body: credentials
     })
-    const mytoken = await answer.json();
-
-    //console.log(mytoken);
-
-    //create connexion error message class to new <p> and append it at the top of <section>
-    connexionMsg = document.createElement("p");
-    connexionMsg.classList.add('error-message');
-    const topChild = loginId.firstChild;
-    loginId.insertBefore(connexionMsg, topChild);
-
-    if (mytoken.token != null){
+    //console.log(answer);
+    //check if fetch answer is OK
+    if (answer.ok){
+        //store the JSON answer
+        const mytoken = await answer.json(); 
+        //console.log(mytoken);
         console.log("login OK");
-        //create innerHTML in <h1>
-        //connexionMsg.innerHTML = "Connexion réussie";
         localStorage.setItem('token', mytoken.token);
-        console.log('Token stored in session storage:', mytoken.token);
+        //console.log('Token stored in session storage:', mytoken.token);
         //set 1s delay: Clear the connexion message and redirects to index.html
         setTimeout(() => {
             window.location.href = "index.html";
         }, "1000")
     }else{
         console.log("login NOT OK");
-        //create innerHTML in <h1>
-        connexionMsg.innerHTML = "Adresse email et/ou mot de passe incorrects";
-        //set 1s delay and clear the connexion message
-        setTimeout(() => {
-            connexionMsg.remove();
-        }, "1000")
-
+        //check if error message doesn't already exists and if not, create connexion error message class to new <p> and append it at the top of <section>
+        const errorCheck = document.querySelector('.error-message');
+        if (errorCheck === null){
+            connexionMsg = document.createElement("p");
+            connexionMsg.innerHTML = "Adresse email et/ou mot de passe incorrects";
+            connexionMsg.classList.add('error-message');
+            const topChild = loginId.firstChild;
+            loginId.insertBefore(connexionMsg, topChild);
+            //set 2s delay and clear the connexion message
+            setTimeout(() => {
+                connexionMsg.remove();
+            }, "2000")
+        }
     }
 });

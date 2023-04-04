@@ -366,6 +366,19 @@ input[type="submit"]:hover{
 	background-color: #0e2f28;
 }
 
+.modal-bkg{
+	background: rgba(0, 0, 0, 0.3);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+}
+
+dialog::backdrop {
+	background: rgba(0, 0, 0, 0.3);
+	display: none;
+}
+
 footer{
 	background-color: white;
 }

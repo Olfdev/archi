@@ -81,10 +81,12 @@ function displayAdmin(){
     //create <i>, add Fontawesome class and append it to the above <div>
     const ib = document.createElement("i");
     ib.classList.add('fa-regular', 'fa-pen-to-square');
+    ib.classList.add('modal');
     div.appendChild(ib);
 
     //create <p> and append it to the above <div>
     const pb = document.createElement("p");
+    pb.classList.add('modal');
     pb.innerHTML = "modifier";
     div.appendChild(pb);
 }
