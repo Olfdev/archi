@@ -1,5 +1,6 @@
 const login = document.querySelector('.logmein');
 const loginId = document.getElementById('login')
+const submitBtn = document.getElementById('submit-btn');
 //const errorCheck = document.querySelectorAll('p');
 let connexionMsg;
 
@@ -29,6 +30,11 @@ login.addEventListener("submit", async function (event) {
         //console.log(mytoken);
         console.log("login OK");
         localStorage.setItem('token', mytoken.token);
+        //change submit button text by throbber and remove pointer cursor
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+        submitBtn.setAttribute("disabled", "true");
+        submitBtn.style.cursor = "auto";
+        submitBtn.style.pointerEvents = "none";
         //console.log('Token stored in session storage:', mytoken.token);
         //set 1s delay: Clear the connexion message and redirects to index.html
         setTimeout(() => {
