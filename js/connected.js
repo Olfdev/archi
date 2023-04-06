@@ -1,3 +1,4 @@
+const loginLink = document.getElementById('login-link');
 const logoutLink = document.getElementById('logout-link');
 const header = document.querySelector('header');
 const adminEdit = document.getElementById('admin-edit');
@@ -12,17 +13,17 @@ var token = localStorage.getItem('token');
 if (token !== null){
     console.log('User is connected');
     //display the logout link
-    document.getElementById('logout-link').style.display = 'block';
+    logoutLink.style.display = 'block';
     //hide the login link
-    document.getElementById('login-link').style.display = 'none';
+    loginLink.style.display = 'none';
     //display admin links
     displayAdmin();
 }else{
     console.log('User is not connected');
     //hide the logout link
-    document.getElementById('logout-link').style.display = 'none';
+    logoutLink.style.display = 'none';
     //display the login link
-    document.getElementById('login-link').style.display = 'block';
+    loginLink.style.display = 'block';
 }
 
 //log out

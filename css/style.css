@@ -492,6 +492,10 @@ dialog p:hover{
 	right: 2em;
 }
 
+.fa-arrows-up-down-left-right, .fa-trash-can{
+	vertical-align: text-bottom;
+}
+
 #separator{
 	height: 1px;
 	width: auto;

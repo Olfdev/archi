@@ -1,3 +1,4 @@
+//const link = document.querySelector('#admin-edit-portfolio')
 const login = document.querySelector('.logmein');
 const loginId = document.getElementById('login')
 const submitBtn = document.getElementById('submit-btn');
@@ -5,6 +6,7 @@ const submitBtn = document.getElementById('submit-btn');
 let connexionMsg;
 
 //listen to the submit button
+if (login)
 login.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -13,7 +15,7 @@ login.addEventListener("submit", async function (event) {
     //console.log(event.target.querySelector("[name=email]").value);
     const password = event.target.querySelector("[name=password").value;
     //console.log(event.target.querySelector("[name=password").value);
-    const credentials = JSON.stringify({email: email, password: password})
+    const credentials = JSON.stringify({email: email, password: password});
     //console.log(credentials);
 
     //compare the credentials with the stored ones and get the backend answer
@@ -26,10 +28,10 @@ login.addEventListener("submit", async function (event) {
     //check if fetch answer is OK
     if (answer.ok){
         //store the JSON answer
-        const mytoken = await answer.json(); 
-        //console.log(mytoken);
+        const myToken = await answer.json();
+        console.log(myToken);
         console.log("login OK");
-        localStorage.setItem('token', mytoken.token);
+        localStorage.setItem('token', myToken.token);
         //change submit button text by throbber and remove pointer cursor
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
         submitBtn.setAttribute("disabled", "true");

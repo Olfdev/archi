@@ -7,6 +7,8 @@ const btnContainer = document.querySelector('.buttons-container');
 //fetch works
 const answerWorks = await fetch('http://localhost:5678/api/works');
 worksArray = await answerWorks.json();
+console.log(worksArray);
+export { worksArray };
 
 //fetch categories
 const answerCategories = await fetch('http://localhost:5678/api/categories');
@@ -62,6 +64,13 @@ export function createAll(element, getSubtitle){
         const figcaption = document.createElement("figcaption");
         figure.appendChild(figcaption);
         figcaption.innerHTML = subtitle;
+    }
+    if (worksArray.length === 0){
+        const p = document.createElement("span");
+        //p.style.position = "relative";
+        p.innerHTML = "Aucun travaux à afficher"
+        p.style.textTransform = "uppercase";
+        element.appendChild(p);
     }
 }
 

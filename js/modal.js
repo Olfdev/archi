@@ -1,6 +1,7 @@
 import { createAll } from './works_filters.js';
+import { worksArray } from './works_filters.js';
 
-let worksArray;
+let works;
 
 //fetch works
 // const answerWorks = await fetch('http://localhost:5678/api/works');
@@ -8,12 +9,14 @@ let worksArray;
 
 const dialog = document.querySelector('.dialog');
 const dialogP = dialog.querySelector('p');
-const link = document.querySelector('#admin-edit-portfolio')
+//const link = document.querySelector('#admin-edit-portfolio')
+const link = document.getElementById('admin-edit-portfolio')
 const modalBkg = document.getElementById("modal-bkg");
 const adminGallery = document.getElementById('admin-gallery');
 const closeModal = document.getElementById('close');
 
 //add a click event listener to the link element
+if (link)
 link.addEventListener('click', event => {
 
     //open the dialog
@@ -41,8 +44,57 @@ link.addEventListener('click', event => {
 });
 
 dialogP.addEventListener('click', () => {
-    adminGallery.innerHTML = "";
+    //adminGallery.innerHTML = "";
+    // DeleteItem();
+    if (worksArray.length !== 0){
+        for (let i = 0; i <= worksArray.length; i++) {
+            //create variable for each work
+            works = worksArray[i].id;
+            //if (works.id == indexToDelete){
+                deleteItem(works);
+            //}
+        }
+    }
 });
+
+async function deleteItem(indexToDelete){
+    //retrieve the token
+    let myToken = localStorage.getItem('token');
+
+    //compare the token with the stored one and get the backend answer
+    const answer = await fetch(`http://localhost:5678/api/works/${indexToDelete}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${myToken}`}
+    });
+    //console.log(answer);
+    //check if fetch answer is OK
+    if (answer.ok){
+        console.log(answer);
+        //worksArray.splice(indexToDelete, 1);
+        const idToDelete = worksArray.findIndex(work => work.id === indexToDelete);
+        if (idToDelete !== -1) {
+            worksArray.splice(idToDelete, 1);
+            console.log(`array n°${idToDelete} containing id n°${indexToDelete} deleted on the backend`);
+        }else{
+            console.log(`No array found containing id n°${indexToDelete} (${idToDelete} returned). Nothing got deleted from the backend`);
+        }
+        console.log(worksArray);
+        //create gallery
+        createAll(adminGallery, () => {
+        return "éditer";
+
+    // createAll(gallery, () => {
+    //     return works.title;
+    // });
+    });
+    iconsCreate();
+    //deleteWork = document.querySelectorAll('figure .delete');
+    //deleteMyWork();
+    }else{
+        console.log(indexToDelete + " not deleted");
+    }
+}
 
 closeModal.addEventListener('click', event => {
     closeDialog();
@@ -60,25 +112,112 @@ createAll(adminGallery, () => {
     return "éditer";
 });
 
-//create delete and move icons and append them to each figure
-const figures = adminGallery.querySelectorAll('figure');
-const firstFigure = adminGallery.querySelector('figure');
+// function iconsCreate(){
 
-const del = document.createElement("div");
-del.classList.add('delete');
-del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+//     //create delete and move icons and append them to each figure
+//     const figures = adminGallery.querySelectorAll('figure');
+//     console.log(figures);
+//     const firstFigure = adminGallery.querySelector('figure');
 
-const move = document.createElement("div");
-move.innerHTML = '<i class="fa-solid fa-arrows-up-down-left-right"></i>';
-move.classList.add('move');
+//     //create delete icon
+//     const del = document.createElement("div");
+//     del.classList.add('delete');
+//     del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
 
-figures.forEach(fig => {
-    fig.appendChild(del.cloneNode(true));
-    //fig.appendChild(move.cloneNode(true));
+//     //create move icon
+//     const move = document.createElement("div");
+//     move.innerHTML = '<i class="fa-solid fa-arrows-up-down-left-right"></i>';
+//     move.classList.add('move');
+
+//     //append del icons
+//     figures.forEach(fig => {
+//         //fig.appendChild(move.cloneNode(true));
+//         fig.appendChild(del.cloneNode(true));
+//     });
+
+//     //append move icon
+//     firstFigure.appendChild(move);
+// }
+
+function iconsCreate(){
+
+    //create delete and move icons and append them to each figure
+    const figures = adminGallery.querySelectorAll('figure');
+    console.log(figures);
+    const firstFigure = adminGallery.querySelector('figure');
+
+    //create move icon
+    const move = document.createElement("div");
+    move.innerHTML = '<i class="fa-solid fa-arrows-up-down-left-right"></i>';
+    move.classList.add('move');
+
+    //append del icons
+    figures.forEach((fig, index) => {
+    
+        //create delete icon
+        const del = document.createElement("div");
+        del.classList.add('delete');
+        del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        del.dataset.index = index;
+        fig.appendChild(del); 
+    });
+    const deleteDivs = document.querySelectorAll(".delete");
+
+    deleteDivs.forEach(deleteDiv => {
+        deleteDiv.addEventListener("click", function() {
+            console.log("Delete button clicked on index:", this.dataset.index);
+
+            for (let i = 0; i < worksArray.length; i++) {
+                console.log(i);
+                if (i == this.dataset.index){
+                deleteItem(worksArray[i].id);
+                console.log(worksArray[i].id);
+                } 
+            }
+
+            // arrayData = this.dataset.index;
+
+            // for (let i = 0; i < worksArray.length; i++) {
+            //     //create variable for each work
+            //     works = worksArray[i];
+            //     if (works.id == indexToDelete){
+            //         deleteItem();
+            //     }
+            // }
+            // do something else here
+    });
 });
 
-firstFigure.appendChild(move);
+    //append move icon
+    if (worksArray.length !== 0) firstFigure.appendChild(move);
+    
 
+    // const deleteDivs = document.querySelectorAll(".delete");
+
+    // deleteDivs.forEach(function(deleteDiv) {
+    //     deleteDiv.addEventListener("click", function() {
+    //         console.log("Delete button clicked on index:", this.dataset.index);
+    //         // do something else here
+    //     });
+    // });
+}
+
+iconsCreate();
+
+// function deleteMyWork(){
+//     let deleteWork = document.querySelectorAll('figure .delete');
+//     console.log(deleteWork);
+//     deleteWork.forEach(event => {
+//         event.addEventListener('click', () => {
+//             const index = Array.from(deleteWork).indexOf(event);
+//             console.log(`Clicked on element at index ${index}`);
+//             indexToDelete = index + 1;
+//             deleteItem();
+//             //deleteWork = document.querySelectorAll('figure .delete');
+//         });
+//     });
+// }
+// deleteMyWork();
 // figures.forEach(append => {
 //     append.appendChild(del);
 //     append.appendChild(move);
