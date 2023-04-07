@@ -1,13 +1,14 @@
 let worksArray;
 let workName;
 let works;
+let worksTitle;
 let categoriesArray;
 const gallery = document.getElementById('gallery');
 const btnContainer = document.querySelector('.buttons-container');
 //fetch works
 const answerWorks = await fetch('http://localhost:5678/api/works');
 worksArray = await answerWorks.json();
-console.log(worksArray);
+//console.log(worksArray);
 export { worksArray };
 
 //fetch categories
@@ -46,6 +47,7 @@ export function createAll(element, getSubtitle){
 
         //create variable for each work
         works = worksArray[i];
+        worksTitle = works.title;
         //const worksSubtitle = works.title;
         const subtitle = getSubtitle();
         
@@ -65,11 +67,14 @@ export function createAll(element, getSubtitle){
         figure.appendChild(figcaption);
         figcaption.innerHTML = subtitle;
     }
+    //create empty message if there is no work to display
     if (worksArray.length === 0){
-        const p = document.createElement("span");
+        const p = document.createElement("h2");
         //p.style.position = "relative";
         p.innerHTML = "Aucun travaux à afficher"
         p.style.textTransform = "uppercase";
+        p.style.fontSize = "initial";
+        element.style.display = "block";
         element.appendChild(p);
     }
 }
@@ -114,6 +119,7 @@ function createDom(){
     const filtered = worksArray.filter(element => element.category.name === workName);
     for (let i = 0; i < filtered.length; i++) {
         const works = filtered[i];
+        worksTitle = works.title;
 
         //create <figure> and append it to #gallery
         const figure = document.createElement("figure");
@@ -128,9 +134,9 @@ function createDom(){
         //create <figcaption> and append it to above <figure>
         const figcaption = document.createElement("figcaption");
         figure.appendChild(figcaption);
-        figcaption.innerHTML = works.title;
+        figcaption.innerHTML = worksTitle;
     }
 }
 createAll(gallery, () => {
-    return works.title;
+    return worksTitle;
 });

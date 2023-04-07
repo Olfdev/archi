@@ -47,7 +47,7 @@ dialogP.addEventListener('click', () => {
     //adminGallery.innerHTML = "";
     // DeleteItem();
     if (worksArray.length !== 0){
-        for (let i = 0; i <= worksArray.length; i++) {
+        for (let i = 0; i < worksArray.length; i++) {
             //create variable for each work
             works = worksArray[i].id;
             //if (works.id == indexToDelete){
@@ -70,7 +70,7 @@ async function deleteItem(indexToDelete){
     //console.log(answer);
     //check if fetch answer is OK
     if (answer.ok){
-        console.log(answer);
+        //console.log(answer);
         //worksArray.splice(indexToDelete, 1);
         const idToDelete = worksArray.findIndex(work => work.id === indexToDelete);
         if (idToDelete !== -1) {
@@ -79,7 +79,7 @@ async function deleteItem(indexToDelete){
         }else{
             console.log(`No array found containing id n°${indexToDelete} (${idToDelete} returned). Nothing got deleted from the backend`);
         }
-        console.log(worksArray);
+        //console.log(worksArray);
         //create gallery
         createAll(adminGallery, () => {
         return "éditer";
@@ -92,7 +92,7 @@ async function deleteItem(indexToDelete){
     //deleteWork = document.querySelectorAll('figure .delete');
     //deleteMyWork();
     }else{
-        console.log(indexToDelete + " not deleted");
+        console.log("Error: Wrong credentials. Cannot delete array");
     }
 }
 
@@ -143,7 +143,7 @@ function iconsCreate(){
 
     //create delete and move icons and append them to each figure
     const figures = adminGallery.querySelectorAll('figure');
-    console.log(figures);
+    //console.log(figures);
     const firstFigure = adminGallery.querySelector('figure');
 
     //create move icon
@@ -168,10 +168,10 @@ function iconsCreate(){
             console.log("Delete button clicked on index:", this.dataset.index);
 
             for (let i = 0; i < worksArray.length; i++) {
-                console.log(i);
+                //console.log(i);
                 if (i == this.dataset.index){
                 deleteItem(worksArray[i].id);
-                console.log(worksArray[i].id);
+                //console.log(worksArray[i].id);
                 } 
             }
 
