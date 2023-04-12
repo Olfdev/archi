@@ -24,8 +24,9 @@ const formSelect = document.getElementById('form-select');
 //retrieve the token
 let myToken = localStorage.getItem('token');
 
-//add a click event listener to the link element
+//if modify link is displayed (logged in as admin)
 if (link){
+    //add a click event listener to the link element
     link.addEventListener('click', event => {
         //draw the gallery dialog modal
         dialogRun(event);
@@ -39,6 +40,31 @@ closeModal.addEventListener('click', event => {
     closeDialog();
     document.removeEventListener('click', event);
 })
+
+//listen to a click on the full document
+document.addEventListener('click', event => {
+    //check if the clicked element is not the dialog or one of its descendants
+    if (!dialog.contains(event.target)){
+        //if the modal is already open
+        if (dialog.open) {
+            //close the dialog
+            closeDialog();
+        }
+    }
+    document.removeEventListener('click', event);
+});
+
+//close if ESC key is used
+document.addEventListener('keydown', event => {
+    if (event.key === "Escape") {
+        //if the modal is already open
+        if (dialog.open) {
+            //close the dialog
+            closeDialog();
+        }
+    }
+    document.removeEventListener('click', event);
+});
 
 //if back arrow is clicked
 backModal.addEventListener('click', event => {
@@ -55,14 +81,14 @@ addPictureBtn.addEventListener('click', () => {
     addPictureRun();
 })
 
-//when a category is clicked
+//if a category is clicked
 formSelect.addEventListener('click', () => {
     //set variable based on the clicked category for retrieval
     selectedCat = formSelect.options[formSelect.selectedIndex].value;
     document.removeEventListener('click', this);
 });
 
-//when upload button is clicked
+//if upload button is clicked
 uploadBtn.addEventListener('click', async (event) => {
     //get what user typed in the Title field
     selectedDesc = imgDesc.value;
@@ -73,7 +99,7 @@ uploadBtn.addEventListener('click', async (event) => {
     document.removeEventListener('click', event);
 });
 
-//when the "empty gallery" link is clicked
+//if the "empty gallery" link is clicked
 dialogP.addEventListener('click', () => {
     //if array containing all works is not empty
     if (worksArray.length !== 0){
@@ -87,16 +113,16 @@ dialogP.addEventListener('click', () => {
 });
 
 function closeDialog(){
-    //create the gallery so it refreshes works
-    createAll(gallery, () => {
-        return worksTitle;
-    })
     //close the dialog
     dialog.close();
     //remove the modal background
     modalBkg.classList.remove('modal-bkg');
     //remove the overflow hidden
     document.body.style.overflowY = null;
+    //create the gallery so it refreshes works
+    createAll(gallery, () => {
+        return worksTitle;
+    })
 }
 
 async function deleteItem(indexToUse){
@@ -146,9 +172,9 @@ async function addItem(){
 
     //check if fetch answer is OK
     if (answer.ok){
-        console.log("answer is OK");
+        console.log("Work added to the database");
     }else{
-        console.log("answer is NOT OK");
+        console.log("Error: Work not added to the database");
     }
 }
 
@@ -267,24 +293,6 @@ async function dialogRun(event){
     //create icons
     iconsCreate();
 
-    //hide back arrow
-    backModal.style.visibility = "hidden";
-    //hide the informations form
-    addPicForm.style.display = "none";
-    //change title
-    modalTitle.innerHTML = "Galerie photo";
-    //set back grid display
-    adminGallery.style.display = null;
-    //remove adminGallery .addpic class and set back padding
-    adminGallery.classList.remove('addpic');
-    adminGallery.style.padding = null;
-    //hide upload button
-    uploadBtn.style.display = null;
-    //display add picture button
-    addPictureBtn.style.display = null;
-    //display delete gallery link back
-    dialogP.style.display = null;
-
     //show the modal if not already open
     if (!dialog.open) {
         dialog.showModal();
@@ -295,32 +303,33 @@ async function dialogRun(event){
     modalBkg.classList.add('modal-bkg');
     //set overflowY to hidden so we can't scroll
     document.body.style.overflowY = "hidden";
-
-    //add a click event listener to the document object
-    document.addEventListener('click', event => {
-        //check if the clicked element is not the dialog or one of its descendants
-        if (!dialog.contains(event.target)){
-            //if the clicked element is not the dialog or one of its descendants, close the dialog
-            closeDialog();
-        }
-        document.removeEventListener('click', event);
-    });
-
-    //close if ESC key is used
-    document.addEventListener('keydown', event => {
-    if (event.key === "Escape") {
-        closeDialog();
-        }
-    });
-    document.removeEventListener('click', event);
+    //hide back arrow
+    backModal.style.visibility = "hidden";
+    //hide the informations form
+    addPicForm.style.display = "none";
+    //change title
+    modalTitle.innerHTML = "Galerie photo";
+    //set back grid display if worksArray is not empty
+    if (worksArray.length !== 0){
+        adminGallery.style.display = null;
+    }
+    //remove adminGallery .addpic class and set back padding
+    adminGallery.classList.remove('addpic');
+    adminGallery.style.padding = null;
+    //hide upload button
+    uploadBtn.style.display = null;
+    //display add picture button
+    addPictureBtn.style.display = null;
+    //display delete gallery link back
+    dialogP.style.display = null;
 }
 
 function selectImage(){
-    // Create a new file input element
+    //create <input> tag
     const fileInput = document.createElement('input');
-    //set to file
+    //set type to file
     fileInput.type = 'file';
-    //set to PNG & JPG only
+    //accept PNG & JPG only
     fileInput.accept = 'image/jpeg, image/png';
     //get the selected file
     fileInput.onchange = function() {

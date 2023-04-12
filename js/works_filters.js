@@ -24,38 +24,38 @@ export async function createAll(element, getSubtitle){
     await fetchWorks();
     //empty innerHTML
     element.innerHTML = "";
-    //create each work
-    for (let i = 0; i < worksArray.length; i++) {
-        //create variable for each work
-        works = worksArray[i];
-        worksTitle = works.title;
-        const subtitle = getSubtitle();
-        //create <figure> and append it to #gallery
-        const figure = document.createElement("figure");
-        figure.style.position = "relative";
-        element.appendChild(figure);
-        //create <img>, image source & alt, and append it to the above <figure>
-        const img = document.createElement("img");
-        img.src = works.imageUrl;
-        img.alt = "Gallery picture";
-        figure.appendChild(img);
-        //create <figcaption> and append it to above <figure>
-        const figcaption = document.createElement("figcaption");
-        figure.appendChild(figcaption);
-        figcaption.innerHTML = subtitle;
-    }
-
-    //create empty message if there is no work to display
-    if (worksArray.length === 0){
-        const p = document.createElement("h2");
-        //p.style.position = "relative";
-        p.innerHTML = "Aucun travaux à afficher"
-        p.style.textTransform = "uppercase";
-        p.style.fontSize = "initial";
-        element.style.display = "block";
-        element.appendChild(p);
+    if (worksArray.length !== 0){
+        //create each work
+        for (let i = 0; i < worksArray.length; i++) {
+            //create variable for each work
+            works = worksArray[i];
+            //create variable for each work title
+            worksTitle = works.title;
+            const subtitle = getSubtitle();
+            //create <figure> and append it to #gallery
+            const figure = document.createElement("figure");
+            figure.style.position = "relative";
+            element.appendChild(figure);
+            //create <img>, image source & alt, and append it to the above <figure>
+            const img = document.createElement("img");
+            img.src = works.imageUrl;
+            img.alt = "Gallery picture";
+            figure.appendChild(img);
+            //create <figcaption> and append it to above <figure>
+            const figcaption = document.createElement("figcaption");
+            figure.appendChild(figcaption);
+            figcaption.innerHTML = subtitle;
+            element.style.display = null;
+        }
     }else{
-        element.style.display = null;
+        //create empty message if there is no work to display
+        const txt = document.createElement("h2");
+        //p.style.position = "relative";
+        txt.innerHTML = "Aucun travaux à afficher"
+        txt.style.textTransform = "uppercase";
+        txt.style.fontSize = "initial";
+        element.style.display = "block";
+        element.appendChild(txt);
     }
 }
 
@@ -73,7 +73,7 @@ allBtn.addEventListener('click', () => {
     buttons.forEach(oldBtn => oldBtn.classList.remove('button-selected'));
     allBtn.classList.add('button-selected');
     createAll(gallery, () => {
-        return works.title;
+        return worksTitle;
     });
     document.removeEventListener('click', this);
 });
@@ -97,6 +97,7 @@ for (let i = 0; i < categoriesArray.length; i++) {
 
 //create DOM works for each category (except All)
 function createDom(){
+    //empty innerHTML
     gallery.innerHTML = "";
     const filtered = worksArray.filter(element => element.category.name === workName);
     for (let i = 0; i < filtered.length; i++) {
