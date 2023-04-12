@@ -123,10 +123,6 @@ a:active, a:hover{
     color: #B1663C;
 }
 
-body{
-	line-height: 1;
-}
-
 ol, ul{
 	list-style: none;
 }
@@ -148,8 +144,8 @@ table{
 
 /** end reset css**/
 body{
-	/* max-width: 1440px; */
-	margin:auto;
+	line-height: 1;
+	/* margin:auto; */
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background-color: #fffef8;
@@ -317,8 +313,7 @@ nav li img{
 
 #login{
 	width: 40%;
-	margin-inline: auto;
-    margin-block: 15rem;
+	margin: 10rem auto;
 }
 
 #login p:last-child{
@@ -600,10 +595,11 @@ select::-ms-expand {
 
 footer{
 	background-color: white;
+	width: 100%;
+	bottom: 0;
 }
 
 footer nav ul{
-	display: flex;
 	justify-content: flex-end;
 	margin-right: 2em;
 	padding: 2em;
