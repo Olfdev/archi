@@ -108,13 +108,6 @@ async function deleteItem(indexToUse){
 
     //check if fetch answer is OK
     if (answer.ok){
-        //recreate gallery
-        await createAll(adminGallery, () => {
-            return "éditer";
-        });
-
-        //recreate icons
-        iconsCreate();
         //compare work index and index to use to delete the right one
         const idToDelete = worksArray.findIndex(work => work.id === indexToUse);
 
@@ -123,6 +116,13 @@ async function deleteItem(indexToUse){
             //remove the id to delete from the array containing all works
             worksArray.splice(idToDelete, 1);
             console.log(`array n°${idToDelete} containing id n°${indexToUse} deleted on the backend`);
+            //recreate gallery
+            await createAll(adminGallery, () => {
+                return "éditer";
+            });
+
+            //recreate icons
+            iconsCreate();
         }else{
             console.log(`No array found containing id n°${indexToUse} (${idToDelete} returned). Nothing got deleted from the backend`);
         }
