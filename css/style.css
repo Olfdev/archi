@@ -489,6 +489,7 @@ dialog::backdrop{
 
 #admin-gallery img{
 	width: 100%;
+	max-width: 5rem;
 	height: 6.5rem;
     object-fit: cover;
 }
