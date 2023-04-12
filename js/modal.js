@@ -345,6 +345,7 @@ function selectImage(){
         img.src = URL.createObjectURL(selectedPic);
         img.style.height = "185px"
         img.style.width = "auto";
+        img.style.maxWidth = "initial";
         //const addPic = document.querySelector('.addpic');        
         adminGallery.appendChild(img);
     };
