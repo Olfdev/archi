@@ -32,7 +32,7 @@ logoutLink.addEventListener('click', function() {
 	//remove the token from session storage
 	//localStorage.removeItem('token');
 	localStorage.clear();
-	console.log('Token removed from session storage');
+	console.log('Token removed from local storage');
 	//refresh index.html
 	window.location.href = "./index.html";
     document.removeEventListener('click', this);

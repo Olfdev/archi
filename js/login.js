@@ -26,7 +26,6 @@ if (login){
         if (answer.ok){
             //store the JSON answer
             const myToken = await answer.json();
-            console.log(myToken);
             console.log("login OK");
             localStorage.setItem('token', myToken.token);
             //change submit button text by throbber and remove pointer cursor

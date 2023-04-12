@@ -12,7 +12,6 @@ async function fetchWorks(){
     //fetch works
     const answerWorks = await fetch('http://localhost:5678/api/works');
     worksArray = await answerWorks.json();
-    console.log(worksArray);
 }
 
 //fetch categories
@@ -27,7 +26,6 @@ export async function createAll(element, getSubtitle){
     element.innerHTML = "";
     //create each work
     for (let i = 0; i < worksArray.length; i++) {
-        console.log(worksArray.length);
         //create variable for each work
         works = worksArray[i];
         worksTitle = works.title;
