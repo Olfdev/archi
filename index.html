@@ -15,7 +15,6 @@
 	<script src="./js/works_filters.js" type="module"></script>
 	<script defer src="./js/connected.js"></script>
 	<script src="./js/modal.js" type="module"></script>
-	<!-- <script src="./js/login.js" type="module"></script> -->
 </head>
 <body>
 	<div id="modal-bkg"></div>
@@ -67,13 +66,24 @@
 		</form>
 	</section>
 	<dialog class="dialog">
-		<div id="close"><i class="fa-solid fa-xmark"></i></div>
+		<div id="top-btns">
+			<div id="back"><i class="fa-solid fa-arrow-left"></i></div>
+			<div id="close"><i class="fa-solid fa-xmark"></i></div>
+		</div>
 		<h3 id="gallery-title">Galerie photo</h3>
 		<div id="gallery-container">
 			<div id="admin-gallery"></div>
+			<div id="addpic-form">
+				<label class="label" for="title">Titre</label>
+				<input class="input" id="img-description" type="text" name="title" >
+		
+				<label class="label" for="category">Catégorie</label>
+				<select class="input" id="form-select" name="category" ></select>
+			</div>
 			<div id="separator"></div>
 		</div>
 		<button type="submit" id="submit-btn">Ajouter une photo</button>
+		<button type="submit" id="upload-btn">Valider</button>
 		<p>Supprimer la galerie</p>
 	</dialog>
 </main>

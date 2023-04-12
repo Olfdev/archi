@@ -35,6 +35,7 @@ logoutLink.addEventListener('click', function() {
 	console.log('Token removed from session storage');
 	//refresh index.html
 	window.location.href = "./index.html";
+    document.removeEventListener('click', this);
 });
 
 function displayAdmin(){
@@ -46,45 +47,37 @@ function displayAdmin(){
     const topChild = header.firstChild;
     editBar.setAttribute('id', 'admin-bar');
     header.insertBefore(editBar, topChild);
-
     //create <i>, add Fontawesome class and append it to the above <div>
     const i = document.createElement("i");
     i.classList.add('fa-regular', 'fa-pen-to-square');
     editBar.appendChild(i);
-
     //create <p> and append it to the above <div>
     const p = document.createElement("p");
     p.innerHTML = "Mode édition";
     editBar.appendChild(p);
-
     //create button and append it to the above <div>
     const editBtn = document.createElement('button');
     editBtn.setAttribute('id', 'button-changes');
     editBtn.type= 'button';
     editBtn.innerHTML = "publier les changements";
     editBar.appendChild(editBtn);
-
     //create <i>, add Fontawesome class and append it to adminEdit
     const ia = document.createElement("i");
     ia.classList.add('fa-regular', 'fa-pen-to-square');
     adminEdit.appendChild(ia);
-
     //create <p> and append it to adminEdit
     const pa = document.createElement("p");
     pa.innerHTML = "modifier";
     adminEdit.appendChild(pa);
-
     //create <div> and append it to portfolioTitle
     const div = document.createElement("div");
     div.setAttribute('id', 'admin-edit-portfolio');
     portfolioTitle.appendChild(div);
-
     //create <i>, add Fontawesome class and append it to the above <div>
     const ib = document.createElement("i");
     ib.classList.add('fa-regular', 'fa-pen-to-square');
     ib.classList.add('modal');
     div.appendChild(ib);
-
     //create <p> and append it to the above <div>
     const pb = document.createElement("p");
     pb.classList.add('modal');

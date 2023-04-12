@@ -228,12 +228,12 @@ nav li img{
 
 #logout-link{
 	display: none;
-	color: #D65353;
+	/* color: #D65353; */
 }
 
-#logout-link:hover{
+/* #logout-link:hover{
 	color: red;
-}
+} */
 
 #introduction{
 	display: flex;
@@ -277,6 +277,8 @@ nav li img{
 
 #gallery img{
 	width: 100%;
+	max-height: 30rem;
+    object-fit: cover;
 }
 
 .buttons-container{
@@ -366,7 +368,7 @@ nav li img{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#submit-btn{
+#submit-btn, #upload-btn{
 	font-family: 'Syne';
     color: white;
     background-color: #1D6154;
@@ -383,11 +385,15 @@ nav li img{
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#submit-btn:focus{
+#upload-btn{
+	display: none;
+}
+
+#submit-btn:focus, #upload-btn:focus{
 	outline: none;
 }
 
-#submit-btn:hover{
+#submit-btn:hover, #upload-btn:hover{
 	background-color: #0e2f28;
 }
 
@@ -431,7 +437,7 @@ dialog::backdrop{
 	display: none;
 }
 
-dialog p{
+.dialog p{
 	color: #D65353;
 	font-family: 'Syne';
 	width: fit-content;
@@ -439,15 +445,31 @@ dialog p{
 	cursor: pointer;
 }
 
-dialog p:hover{
+.dialog p:hover{
 	color: red;
+}
+
+.dialog-addpic p{
+	font-size: x-small;
+}
+
+#top-btns{
+	display: flex;
+    justify-content: space-between;
+}
+
+#back{
+	font-size: large;
+    cursor: pointer;
+    width: fit-content;
+	visibility: hidden;
 }
 
 #close{
 	font-size: large;
-    margin: 0 0 1rem auto;
+    /* margin: 0 0 1rem auto; */
     cursor: pointer;
-    width: fit-content;
+    /* width: fit-content; */
 }
 
 #close i{
@@ -471,7 +493,9 @@ dialog p:hover{
 }
 
 #admin-gallery img{
-	width: 5rem;
+	width: 100%;
+	height: 6.5rem;
+    object-fit: cover;
 }
 
 #admin-gallery figcaption{
@@ -502,6 +526,71 @@ dialog p:hover{
 	vertical-align: text-bottom;
 }
 
+.fa-image{
+	font-size: 4rem;
+	color: #cbd6dc;
+	/* cursor: pointer; */
+}
+
+.addpic{
+	background-color: #e8f1f6;
+	width: 375px;
+	/* max-height: 169px; */
+    flex-direction: column;
+    align-items: center;
+    /* padding: 1.5rem; */
+}
+
+#button-add-pic{
+	font-family: 'Work Sans';
+    color: #306685;
+    font-weight: 600;
+    background-color: #cbd6dc;
+    width: 10rem;
+    border-radius: 60px;
+    padding: 0.8rem;
+    cursor: pointer;
+    border: none;
+}
+
+#addpic-form{
+	display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+	margin-top: 1rem;
+}
+
+.label {
+	margin-top: 1rem;
+	font-weight: 600;
+}
+
+.input{
+	background-color: white;
+    height: 3rem;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	font-family: inherit;
+	padding-inline: 1rem;
+}
+
+select{
+    cursor: pointer;
+	appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right center;
+	background-size: 1rem;
+    background-position-x: 25rem;
+    background-position-y: center;
+}
+
+select::-ms-expand {
+    display: none;
+  }
+
 #separator{
 	height: 1px;
 	width: auto;
@@ -516,6 +605,6 @@ footer{
 footer nav ul{
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em;
+	margin-right: 2em;
 	padding: 2em;
 }
