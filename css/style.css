@@ -313,7 +313,7 @@ nav li img{
 
 #login{
 	width: 40%;
-	margin: 10rem auto;
+	margin: 10rem auto auto;
 }
 
 #login p:last-child{
