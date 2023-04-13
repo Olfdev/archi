@@ -383,6 +383,10 @@ nav li img{
 #upload-btn{
 	display: none;
 }
+#upload-btn[disabled]{
+	background-color: #a7a7a7;
+	cursor: default;
+}
 
 #submit-btn:focus, #upload-btn:focus{
 	outline: none;
@@ -390,6 +394,10 @@ nav li img{
 
 #submit-btn:hover, #upload-btn:hover{
 	background-color: #0e2f28;
+}
+
+#upload-btn[disabled]:hover{
+	background-color: #a7a7a7;
 }
 
 .fa-spinner:before {

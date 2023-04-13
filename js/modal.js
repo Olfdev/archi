@@ -79,6 +79,14 @@ backModal.addEventListener('click', event => {
 addPictureBtn.addEventListener('click', () => {
     //draw the add picture dialog modal
     addPictureRun();
+    //check if picture and title are filled to enable the submit button. Since they're all emptied by default, it will be back to disabled.
+    checkInputs()
+})
+
+//if something is written in the title field
+imgDesc.addEventListener("input", () => {
+    //check if picture and title are filled to enable the submit button
+    checkInputs()
 })
 
 //if a category is clicked
@@ -357,8 +365,18 @@ function selectImage(){
         img.style.maxWidth = "initial";
         //const addPic = document.querySelector('.addpic');        
         adminGallery.appendChild(img);
+        //check if picture and title are filled to enable the submit button
+        checkInputs()
     };
-
     //click the fileInput
     fileInput.click();
+}
+
+//check if picture and title have been filled and enable the submit button
+function checkInputs(){
+    if (selectedPic && imgDesc.value  !== ""){
+        uploadBtn.disabled = false;
+    }else{
+        uploadBtn.disabled = true;
+    }
 }
