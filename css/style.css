@@ -497,8 +497,8 @@ dialog::backdrop{
 }
 
 #admin-gallery img{
-	width: 100%;
-	max-width: 5rem;
+	/* width: 100%; */
+	width: 5rem;
 	height: 6.5rem;
     object-fit: cover;
 }
@@ -539,7 +539,7 @@ dialog::backdrop{
 
 .addpic{
 	background-color: #e8f1f6;
-	width: 375px;
+	width: 384px;
     flex-direction: column;
     align-items: center;
 }
