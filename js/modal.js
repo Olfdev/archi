@@ -1,6 +1,6 @@
-import { createAll, worksTitle } from './works_filters.js';
-import { worksArray } from './works_filters.js';
-import { categoriesArray } from './works_filters.js';
+import { createAll, worksTitle } from './main.js';
+import { worksArray } from './main.js';
+import { categoriesArray } from './main.js';
 
 let works;
 let selectedPic;
@@ -41,14 +41,17 @@ closeModal.addEventListener('click', event => {
     document.removeEventListener('click', event);
 })
 
-//listen to a click on the full document
-document.addEventListener('click', event => {
+//listen to a mouse button pressed down on the full document (if the mouse button is pressed down in the modal and released on the document, the modal won't close: UX QOL)
+document.addEventListener('mousedown', event => {
+    //if mouse down is the Left Click
+    if(event.button == 0) {
     //check if the clicked element is not the dialog or one of its descendants
-    if (!dialog.contains(event.target)){
-        //if the modal is already open
-        if (dialog.open) {
-            //close the dialog
-            closeDialog();
+        if (!dialog.contains(event.target)){
+            //if the modal is already open
+            if (dialog.open) {
+                //close the dialog
+                closeDialog();
+            }
         }
     }
     document.removeEventListener('click', event);
