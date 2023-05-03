@@ -54,7 +54,7 @@ document.addEventListener('mousedown', event => {
             }
         }
     }
-    document.removeEventListener('click', event);
+    document.removeEventListener('mousedown', event);
 });
 
 //close if ESC key is used
