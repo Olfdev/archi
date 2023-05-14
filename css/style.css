@@ -146,7 +146,6 @@ table{
 /** end reset css**/
 body{
 	line-height: 1;
-	/* margin:auto; */
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background-color: #fffef8;
@@ -225,12 +224,7 @@ nav li img{
 
 #logout-link{
 	display: none;
-	/* color: #D65353; */
 }
-
-/* #logout-link:hover{
-	color: red;
-} */
 
 #introduction{
 	display: flex;
@@ -242,8 +236,6 @@ nav li img{
 }
 
 #introduction img {
-	/* display: block;
-	margin: auto; */
 	width: 80%;
 }
 
@@ -261,7 +253,6 @@ nav li img{
 
 #portfolio h2{
 	text-align: center;
-	/* margin-top: 4em; */
 }
 
 #gallery{
@@ -471,9 +462,7 @@ dialog::backdrop{
 
 #close{
 	font-size: large;
-    /* margin: 0 0 1rem auto; */
     cursor: pointer;
-    /* width: fit-content; */
 }
 
 #close i{
@@ -497,7 +486,6 @@ dialog::backdrop{
 }
 
 #admin-gallery img{
-	/* width: 100%; */
 	width: 5rem;
 	height: 6.5rem;
     object-fit: cover;
@@ -534,7 +522,6 @@ dialog::backdrop{
 .fa-image{
 	font-size: 4rem;
 	color: #cbd6dc;
-	/* cursor: pointer; */
 }
 
 .addpic{

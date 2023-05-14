@@ -5,7 +5,7 @@ import { categoriesArray } from './main.js';
 let works;
 let selectedPic;
 let selectedDesc;
-let selectedCat = 2;
+let selectedCat = formSelect.options[formSelect.selectedIndex].value;
 
 const dialog = document.querySelector('.dialog');
 const dialogP = dialog.querySelector('p');
@@ -71,8 +71,6 @@ document.addEventListener('keydown', event => {
 
 //if back arrow is clicked
 backModal.addEventListener('click', event => {
-    //close the modal -- A CHECKER, CLIGNOTEMENT DU FOND
-    //closeDialog();
     //draw the gallery dialog modal
     dialogRun(event);
     document.removeEventListener('click', event);
@@ -343,7 +341,7 @@ function selectImage(){
     //accept PNG & JPG only
     fileInput.accept = 'image/jpeg, image/png';
     //get the selected file
-    fileInput.onchange = function() {
+    fileInput.onchange = () => {
         selectedPic = fileInput.files[0];
         //check if the file selected is an image
         if (!selectedPic.type.startsWith('image/')) {
