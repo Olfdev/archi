@@ -51,7 +51,7 @@ export async function createAll(element, getSubtitle){
         //create empty message if there is no work to display
         const txt = document.createElement("h2");
         //p.style.position = "relative";
-        txt.innerHTML = "Aucun travaux à afficher"
+        txt.innerHTML = "Aucuns travaux à afficher"
         txt.style.textTransform = "uppercase";
         txt.style.fontSize = "initial";
         element.style.display = "block";
