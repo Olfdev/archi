@@ -5,7 +5,7 @@ import { categoriesArray } from './main.js';
 let works;
 let selectedPic;
 let selectedDesc;
-let selectedCat = formSelect.options[formSelect.selectedIndex].value;
+let selectedCat;
 
 const dialog = document.querySelector('.dialog');
 const dialogP = dialog.querySelector('p');
@@ -285,6 +285,8 @@ function addPictureRun(){
         //append category to the form
         formSelect.appendChild(option);
     }
+    ////set variable based on the one selected by default when opening the pic upload Modal (in case the user keeps the displayed choice and doesn't click on the list)
+    selectedCat = formSelect.options[formSelect.selectedIndex].value;
     //display upload button
     uploadBtn.style.display = "block";
     //hide add picture button
