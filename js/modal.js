@@ -150,7 +150,7 @@ async function deleteItem(indexToUse){
         if (idToDelete !== -1) {
             //remove the id to delete from the array containing all works
             worksArray.splice(idToDelete, 1);
-            console.log(`array n°${idToDelete} containing id n°${indexToUse} deleted on the backend`);
+            console.log(`array n°${idToDelete} containing id n°${indexToUse} deleted from the database`);
             //recreate gallery
             await createAll(adminGallery, () => {
                 return "éditer";
@@ -159,10 +159,10 @@ async function deleteItem(indexToUse){
             //recreate icons
             iconsCreate();
         }else{
-            console.log(`No array found containing id n°${indexToUse} (${idToDelete} returned). Nothing got deleted from the backend`);
+            console.log(`No array found containing id n°${indexToUse} (${idToDelete} returned). Nothing got deleted from the database`);
         }
     }else{
-        console.log("Error: Wrong credentials. Cannot delete array");
+        console.log("Error: Wrong credentials. Cannot delete array from the database");
     }
 }
 
@@ -344,19 +344,20 @@ function selectImage(){
     fileInput.accept = 'image/jpeg, image/png';
     //get the selected file
     fileInput.onchange = () => {
-        selectedPic = fileInput.files[0];
+        let tempPic = fileInput.files[0];
         //check if the file selected is an image
-        if (!selectedPic.type.startsWith('image/')) {
+        if (!tempPic.type.startsWith('image/')) {
             alert("Le fichier sélectionné n'est pas une image.");
             return;
         }
 
         //check if the image selected is less tha 4MB
-        if (selectedPic.size > 4 * 1024 * 1024) {
+        if (tempPic.size > 4 * 1024 * 1024) {
             alert("L'image sélectionnée est trop lourde. Veuillez sélectionner une image de 4Mo maximum.");
             return;
         }
-
+        //set the selectedPic variable to tempPic if picture requirements are met
+        selectedPic = tempPic;
         //change adminGallery padding for the image to not have padding top
         adminGallery.style.padding = "0 1.5rem";
         //empty adminGallery and append the loaded image
