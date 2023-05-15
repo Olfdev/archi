@@ -1,6 +1,4 @@
-import { createAll, worksTitle } from './main.js';
-import { worksArray } from './main.js';
-import { categoriesArray } from './main.js';
+import { createAll, worksTitle, worksArray, categoriesArray } from './main.js';
 
 let works;
 let selectedPic;
